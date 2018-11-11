@@ -19,7 +19,11 @@ class GameUnit:
         * max_stability (float): The starting stability of this unit. Note than stability can be increased beyond this value by encryptors
         * stability (float): The current health of this unit
         * cost (int): The resource cost of this unit
-
+        ------
+        Custom attributes:
+        * last_move (int) containing the last move of the unit for simulation
+        * intended_move (int) the intended move for the unit in the simulation
+        ------
     """
     def __init__(self, unit_type, config, player_index=None, stability=None, x=-1, y=-1):
         """ Initialize unit variables using args passed
@@ -33,7 +37,10 @@ class GameUnit:
         self.y = y
         self.__serialize_type()
         self.stability = self.max_stability if not stability else stability
-
+        # Customization starts
+        self.last_move = 0
+        self.intended_move = 0
+        # Customization ends
     def __serialize_type(self):
         from .game_state import FIREWALL_TYPES, UNIT_TYPE_TO_INDEX, ENCRYPTOR
         self.stationary = is_stationary(self.unit_type, FIREWALL_TYPES)

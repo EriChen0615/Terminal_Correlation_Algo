@@ -386,7 +386,7 @@ class GameState:
         x, y = map(int, location)
         for unit in self.game_map[x,y]:
             if unit.stationary:
-                return unit
+                return True
         return False
 
     def warn(self, message):
